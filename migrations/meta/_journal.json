@@ -15,6 +15,13 @@
       "when": 1774524054483,
       "tag": "0001_organic_captain_stacy",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1775284690486,
+      "tag": "0002_mighty_zarda",
+      "breakpoints": true
     }
   ]
 }
