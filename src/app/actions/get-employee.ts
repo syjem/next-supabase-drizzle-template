@@ -1,15 +1,11 @@
-'use server';
-
-import { Employee } from '#/lib/drizzle/schema/employees';
 import { createClient } from '#/lib/supabase/server';
 
-export async function getEmployees(): Promise<
-  Pick<Employee, 'name' | 'employee_id'>[]
-> {
+export async function getEmployee(id: number) {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from('employees')
-    .select('name, employee_id');
+    .select('*')
+    .eq('employee_id', id);
 
   if (error) {
     throw new Error(error.message);

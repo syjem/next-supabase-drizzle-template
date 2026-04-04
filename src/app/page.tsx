@@ -1,15 +1,13 @@
-import { getEmployees } from "#/app/actions/get-employees";
+import { getEmployees } from '#/app/actions/get-employees';
+import { columns } from '#/components/columns';
+import { DataTable } from '#/components/data-table';
 
 export default async function Home() {
- const employees = await getEmployees();
+  const employees = await getEmployees();
+
   return (
-    <div>
-      <h1>Employees</h1>
-      <ul>
-        {employees?.map((employee) => (
-          <li key={employee.id}>{employee.name} - {employee.employee_id}</li>
-        ))}
-      </ul>
+    <div className="w-full max-w-2xl mx-auto py-10">
+      <DataTable columns={columns} data={employees} />
     </div>
   );
 }
