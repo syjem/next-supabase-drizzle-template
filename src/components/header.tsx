@@ -1,10 +1,10 @@
-import { getOptionalUser } from '#/app/auth';
+import { getUser } from '#/app/auth';
 import { Button } from '#/components/ui/button';
 import { UserAvatar } from '#/components/user-avatar';
 import Link from 'next/link';
 
 export async function Header() {
-  const user = await getOptionalUser();
+  const user = await getUser();
 
   return (
     <nav className="w-full max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8 flex items-center justify-between border-b">
