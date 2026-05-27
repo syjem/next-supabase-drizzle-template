@@ -7,9 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "schema:generate": "npx drizzle-kit generate",
-    "schema:push": "npx drizzle-kit push",
-    "schema:migrate": "npx drizzle-kit migrate"
+    "drizzle:generate": "npx drizzle-kit generate",
+    "drizzle:push": "npx drizzle-kit push",
+    "drizzle:migrate": "npx drizzle-kit migrate"
   },
   "dependencies": {
     "@supabase/ssr": "^0.9.0",

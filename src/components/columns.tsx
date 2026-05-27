@@ -1,16 +1,16 @@
 'use client';
 
-import { Employee } from '#/lib/drizzle/schema';
+import { Employee } from '#/lib/data';
 import { ColumnDef } from '@tanstack/react-table';
 
-export const columns: ColumnDef<Pick<Employee, 'name' | 'employee_id'>>[] = [
+export const columns: ColumnDef<Employee>[] = [
   {
-    accessorKey: 'employee_id',
+    accessorKey: 'id',
     header: () => <span className="font-bold">ID</span>,
     cell: ({ row }) => {
       return (
         <div className="text-muted-foreground font-medium">
-          {row.getValue('employee_id')}
+          {row.getValue('id')}
         </div>
       );
     },
