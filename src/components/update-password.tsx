@@ -60,11 +60,16 @@ export function UpdatePasswordForm({
               placeholder="New password"
               required
               value={password}
+              className="rounded-full p-4 md:p-5"
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           {error && <p className="text-sm text-red-500">{error}</p>}
-          <Button type="submit" className="w-full" disabled={isLoading}>
+          <Button
+            type="submit"
+            className="w-full rounded-full p-5"
+            disabled={isLoading}
+          >
             {isLoading ? 'Saving...' : 'Save new password'}
           </Button>
         </div>

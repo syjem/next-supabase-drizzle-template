@@ -66,9 +66,9 @@ export function SignUpForm({
             <Input
               id="email"
               type="email"
-              placeholder="m@example.com"
               required
               value={email}
+              className="rounded-full p-4 md:p-5"
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -81,6 +81,7 @@ export function SignUpForm({
               type="password"
               required
               value={password}
+              className="rounded-full p-4 md:p-5"
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
@@ -93,11 +94,16 @@ export function SignUpForm({
               type="password"
               required
               value={confirmPassword}
+              className="rounded-full p-4 md:p-5"
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
           {error && <p className="text-sm text-red-500">{error}</p>}
-          <Button type="submit" className="w-full" disabled={isLoading}>
+          <Button
+            type="submit"
+            className="w-full rounded-full p-5"
+            disabled={isLoading}
+          >
             {isLoading ? 'Creating an account...' : 'Sign up'}
           </Button>
         </div>

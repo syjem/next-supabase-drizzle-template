@@ -79,14 +79,18 @@ export function ForgotPasswordForm({
                 <Input
                   id="email"
                   type="email"
-                  placeholder="m@example.com"
                   required
                   value={email}
+                  className="rounded-full p-4 md:p-5"
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               {error && <p className="text-sm text-red-500">{error}</p>}
-              <Button type="submit" className="w-full p-4" disabled={isLoading}>
+              <Button
+                type="submit"
+                className="w-full rounded-full p-5"
+                disabled={isLoading}
+              >
                 {isLoading ? 'Sending...' : 'Send reset email'}
               </Button>
             </div>

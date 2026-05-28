@@ -7,6 +7,7 @@ import { createClient } from '#/lib/supabase/client';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { toast } from 'sonner';
 
 export default function SignInForm() {
   const router = useRouter();
@@ -50,6 +51,10 @@ export default function SignInForm() {
       if (error) throw error;
 
       router.push('/');
+
+      // Render toast after a short delay to ensure the page has navigated
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      toast.success('Signed in successfully!');
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : 'An error occurred');
     } finally {
@@ -74,6 +79,7 @@ export default function SignInForm() {
             name="email"
             required
             value={email}
+            className="rounded-full p-4 md:p-5"
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
@@ -98,6 +104,7 @@ export default function SignInForm() {
             name="password"
             required
             value={password}
+            className="rounded-full p-4 md:p-5"
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
@@ -105,15 +112,19 @@ export default function SignInForm() {
         {error && <p className="text-sm text-red-500">{error}</p>}
 
         <div className="space-y-2">
-          <Button type="submit" className="w-full p-4" disabled={isLoading}>
+          <Button
+            type="submit"
+            className="w-full rounded-full p-5"
+            disabled={isLoading || isSocialLoading}
+          >
             {isLoading ? 'Signing in...' : 'Sign in'}
           </Button>
           <Button
             onClick={handleSocialLogin}
             variant="outline"
             type="button"
-            className="w-full p-4"
-            disabled={isSocialLoading}
+            className="w-full rounded-full p-5"
+            disabled={isSocialLoading || isLoading}
           >
             {isSocialLoading ? 'Signing in...' : 'Continue with Google'}
           </Button>

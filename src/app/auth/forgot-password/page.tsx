@@ -1,5 +1,13 @@
+import { getUser } from '#/app/auth';
 import { ForgotPasswordForm } from '#/components/forgot-password';
+import { redirect } from 'next/navigation';
 
-export default function Page() {
+export default async function Page() {
+  const user = await getUser();
+
+  if (user) {
+    redirect('/');
+  }
+
   return <ForgotPasswordForm />;
 }

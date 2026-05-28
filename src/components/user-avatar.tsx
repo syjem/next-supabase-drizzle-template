@@ -10,8 +10,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '#/components/ui/dropdown-menu';
+import { cn } from '#/lib/utils';
 import { JwtPayload } from '@supabase/supabase-js';
-import { LogOut } from 'lucide-react';
+import { LogOut, User } from 'lucide-react';
+import Link from 'next/link';
 import { useRef } from 'react';
 
 export function UserAvatar({ user }: { user: JwtPayload | null }) {
@@ -29,11 +31,20 @@ export function UserAvatar({ user }: { user: JwtPayload | null }) {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary cursor-pointer">
-        <Avatar>
-          <AvatarImage src={avatarUrl} alt={initials} />
-          <AvatarFallback>{initials}</AvatarFallback>
-        </Avatar>
+      <DropdownMenuTrigger
+        className={cn(
+          'rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary cursor-pointer',
+          !avatarUrl && 'bg-muted p-1 border border-muted-foreground',
+        )}
+      >
+        {avatarUrl ? (
+          <Avatar>
+            <AvatarImage src={avatarUrl} alt={initials} />
+            <AvatarFallback>{initials}</AvatarFallback>
+          </Avatar>
+        ) : (
+          <User />
+        )}
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-40" align="center">
         <DropdownMenuLabel>
@@ -43,11 +54,14 @@ export function UserAvatar({ user }: { user: JwtPayload | null }) {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
+        <DropdownMenuItem asChild>
+          <Link href="/profile">
+            <User />
+            Profile
+          </Link>
+        </DropdownMenuItem>
         <form action={signOut} ref={formRef}>
-          <DropdownMenuItem
-            onSelect={() => formRef.current?.requestSubmit()}
-            className="font-medium"
-          >
+          <DropdownMenuItem onSelect={() => formRef.current?.requestSubmit()}>
             <LogOut />
             Sign out
           </DropdownMenuItem>
