@@ -8,7 +8,7 @@ import { Input } from '#/components/ui/input';
 import { Label } from '#/components/ui/label';
 import { createClient } from '#/lib/supabase/client';
 import { cn } from '#/lib/utils';
-import { Loader } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 
 export function SignUpForm({
@@ -105,7 +105,7 @@ export function SignUpForm({
             className="w-full rounded-full p-5"
             disabled={isLoading}
           >
-            {isLoading && <Loader className="animate-spin size-4" />}
+            {isLoading && <Loader2 className="animate-spin size-4" />}
             {isLoading ? 'Creating an account...' : 'Sign up'}
           </Button>
         </div>

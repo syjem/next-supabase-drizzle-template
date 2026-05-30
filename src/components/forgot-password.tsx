@@ -14,7 +14,7 @@ import { Input } from '#/components/ui/input';
 import { Label } from '#/components/ui/label';
 import { createClient } from '#/lib/supabase/client';
 import { cn } from '#/lib/utils';
-import { CircleCheckBig, Loader } from 'lucide-react';
+import { CircleCheckBig, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 
 export function ForgotPasswordForm({
@@ -94,7 +94,7 @@ export function ForgotPasswordForm({
                 className="w-full rounded-full p-5"
                 disabled={isLoading}
               >
-                {isLoading && <Loader className="animate-spin size-4" />}
+                {isLoading && <Loader2 className="animate-spin size-4" />}
                 {isLoading ? 'Sending...' : 'Send reset email'}
               </Button>
             </div>

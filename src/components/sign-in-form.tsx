@@ -4,7 +4,7 @@ import { Button } from '#/components/ui/button';
 import { Input } from '#/components/ui/input';
 import { Label } from '#/components/ui/label';
 import { createClient } from '#/lib/supabase/client';
-import { Loader } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -118,7 +118,7 @@ export default function SignInForm() {
             className="w-full rounded-full p-5"
             disabled={isLoading || isSocialLoading}
           >
-            {isLoading && <Loader className="animate-spin size-4" />}
+            {isLoading && <Loader2 className="animate-spin size-4" />}
             {isLoading ? 'Signing in...' : 'Sign in'}
           </Button>
           <Button
@@ -128,7 +128,7 @@ export default function SignInForm() {
             className="w-full rounded-full p-5"
             disabled={isSocialLoading || isLoading}
           >
-            {isSocialLoading && <Loader className="animate-spin size-4" />}
+            {isSocialLoading && <Loader2 className="animate-spin size-4" />}
             {isSocialLoading ? 'Connecting...' : 'Continue with Google'}
           </Button>
         </div>

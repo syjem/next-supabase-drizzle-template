@@ -8,6 +8,7 @@ import { Input } from '#/components/ui/input';
 import { Label } from '#/components/ui/label';
 import { createClient } from '#/lib/supabase/client';
 import { cn } from '#/lib/utils';
+import { Loader2 } from 'lucide-react';
 
 export function UpdatePasswordForm({
   className,
@@ -70,6 +71,7 @@ export function UpdatePasswordForm({
             className="w-full rounded-full p-5"
             disabled={isLoading}
           >
+            {isLoading && <Loader2 className="animate-spin size-4" />}
             {isLoading ? 'Saving...' : 'Save new password'}
           </Button>
         </div>
