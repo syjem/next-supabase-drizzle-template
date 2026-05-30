@@ -12,7 +12,7 @@ import {
 } from '#/components/ui/dropdown-menu';
 import { cn } from '#/lib/utils';
 import { JwtPayload } from '@supabase/supabase-js';
-import { LogOut, User } from 'lucide-react';
+import { LogOut, User, UserCog } from 'lucide-react';
 import Link from 'next/link';
 import { useRef } from 'react';
 
@@ -25,9 +25,10 @@ export function UserAvatar({ user }: { user: JwtPayload | null }) {
 
   const initials = userName
     ?.split(' ')
-    ?.map((word) => word[0])
+    ?.map((part) => part[0])
     ?.join('')
-    ?.toUpperCase();
+    ?.toUpperCase()
+    .slice(0, 2);
 
   return (
     <DropdownMenu>
@@ -43,7 +44,7 @@ export function UserAvatar({ user }: { user: JwtPayload | null }) {
             <AvatarFallback>{initials}</AvatarFallback>
           </Avatar>
         ) : (
-          <User />
+          <User className="p-1" />
         )}
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-40" align="center">
@@ -56,7 +57,7 @@ export function UserAvatar({ user }: { user: JwtPayload | null }) {
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <Link href="/profile">
-            <User />
+            <UserCog />
             Profile
           </Link>
         </DropdownMenuItem>
