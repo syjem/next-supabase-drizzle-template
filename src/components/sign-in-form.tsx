@@ -4,6 +4,7 @@ import { Button } from '#/components/ui/button';
 import { Input } from '#/components/ui/input';
 import { Label } from '#/components/ui/label';
 import { createClient } from '#/lib/supabase/client';
+import { Loader } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -54,7 +55,7 @@ export default function SignInForm() {
 
       // Render toast after a short delay to ensure the page has navigated
       await new Promise((resolve) => setTimeout(resolve, 500));
-      toast.success('Signed in successfully!');
+      toast.success('You have successfully signed in!');
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : 'An error occurred');
     } finally {
@@ -117,6 +118,7 @@ export default function SignInForm() {
             className="w-full rounded-full p-5"
             disabled={isLoading || isSocialLoading}
           >
+            {isLoading && <Loader className="animate-spin size-4" />}
             {isLoading ? 'Signing in...' : 'Sign in'}
           </Button>
           <Button
@@ -126,7 +128,8 @@ export default function SignInForm() {
             className="w-full rounded-full p-5"
             disabled={isSocialLoading || isLoading}
           >
-            {isSocialLoading ? 'Signing in...' : 'Continue with Google'}
+            {isSocialLoading && <Loader className="animate-spin size-4" />}
+            {isSocialLoading ? 'Connecting...' : 'Continue with Google'}
           </Button>
         </div>
 

@@ -11,10 +11,8 @@ export default async function Home() {
   return (
     <React.Fragment>
       <Header />
-      <main>
-        <div className="w-full max-w-2xl mx-auto py-10">
-          <DataTable columns={columns} data={data} />
-        </div>
+      <main className="w-full max-w-2xl mx-auto py-10">
+        <DataTable columns={columns} data={data} />
       </main>
     </React.Fragment>
   );

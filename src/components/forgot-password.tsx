@@ -14,6 +14,7 @@ import { Input } from '#/components/ui/input';
 import { Label } from '#/components/ui/label';
 import { createClient } from '#/lib/supabase/client';
 import { cn } from '#/lib/utils';
+import { CircleCheckBig, Loader } from 'lucide-react';
 import Link from 'next/link';
 
 export function ForgotPasswordForm({
@@ -51,15 +52,17 @@ export function ForgotPasswordForm({
       {...props}
     >
       {success ? (
-        <Card>
-          <CardHeader>
+        <Card className="bg-green-50/10 border-2 border-green-500 px-8 py-10">
+          <CardHeader className="items-center space-x-4 text-center">
+            <div className="mx-auto flex h-12 w-12 items-center justify-center">
+              <CircleCheckBig className="h-10 w-10 text-green-500" />
+            </div>
             <CardTitle className="text-2xl">Check Your Email</CardTitle>
             <CardDescription>Password reset instructions sent</CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-muted-foreground">
-              If you registered using your email and password, you will receive
-              a password reset email.
+            <p className="text-sm text-center text-muted-foreground">
+              Please check your email for instructions to reset your password.
             </p>
           </CardContent>
         </Card>
@@ -91,6 +94,7 @@ export function ForgotPasswordForm({
                 className="w-full rounded-full p-5"
                 disabled={isLoading}
               >
+                {isLoading && <Loader className="animate-spin size-4" />}
                 {isLoading ? 'Sending...' : 'Send reset email'}
               </Button>
             </div>
