@@ -1,10 +1,12 @@
 'use client';
 
+import { uploadAvatar } from '#/actions/upload-avatar';
 import { Avatar, AvatarFallback, AvatarImage } from '#/components/ui/avatar';
 import { avatarUploadSchema } from '#/lib/zod/schema';
 import { Loader2, Upload, User } from 'lucide-react';
 import { useRef, useState } from 'react';
 import { toast } from 'sonner';
+import z from 'zod';
 
 interface ProfileHeaderProps {
   name: string;
@@ -21,7 +23,6 @@ export function ProfileHeader({
 }: ProfileHeaderProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isUploading, setIsUploading] = useState(false);
-  const [previewUrl, setPreviewUrl] = useState<string | undefined>(avatarUrl);
 
   const handleFileSelect = async (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -33,25 +34,19 @@ export function ProfileHeader({
       // Validate file using Zod schema
       await avatarUploadSchema.parseAsync({ file });
 
-      // Create preview URL
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewUrl(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-
-      // Simulate upload
       setIsUploading(true);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      await uploadAvatar(file);
 
       toast.success('Avatar updated successfully');
-      setIsUploading(false);
     } catch (error) {
-      if (error instanceof Error) {
-        toast.error(error.message);
+      if (error instanceof z.ZodError) {
+        toast.error(error.issues[0].message);
       } else {
         toast.error('Failed to upload avatar');
       }
+    } finally {
+      setIsUploading(false);
     }
 
     // Reset file input
@@ -70,9 +65,9 @@ export function ProfileHeader({
   return (
     <div className="flex flex-col items-center gap-6 rounded-lg border border-border bg-card p-8 sm:flex-row sm:items-start">
       <div className="relative">
-        {previewUrl ? (
+        {avatarUrl ? (
           <Avatar className="h-24 w-24 border-4 border-border">
-            <AvatarImage src={previewUrl} alt={initials} />
+            <AvatarImage src={avatarUrl} alt={initials} />
             <AvatarFallback>{initials}</AvatarFallback>
           </Avatar>
         ) : (

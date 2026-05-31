@@ -1,5 +1,6 @@
 'use client';
 
+import { updateProfileInfo } from '#/actions/update-profile-info';
 import { Button } from '#/components/ui/button';
 import {
   Field,
@@ -33,9 +34,22 @@ export function PersonalInfoTab({ initialData }: PersonalInfoTabProps) {
   async function onSubmit(data: PersonalInfoFormData) {
     try {
       setIsLoading(true);
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log('Personal info updated:', data);
+
+      const dirtyFields = form.formState.dirtyFields;
+      const changedData = Object.fromEntries(
+        Object.entries(data).filter(
+          ([key]) => dirtyFields[key as keyof PersonalInfoFormData],
+        ),
+      ) as Partial<PersonalInfoFormData>;
+
+      if (Object.keys(changedData).length === 0) {
+        toast.info('No changes to save');
+        return;
+      }
+
+      await updateProfileInfo(changedData);
+
+      form.reset(data);
       toast.success('Personal information updated successfully');
     } catch (error) {
       console.error('Failed to update personal information:', error);
@@ -74,7 +88,12 @@ export function PersonalInfoTab({ initialData }: PersonalInfoTabProps) {
             <Field>
               <FieldLabel>Email</FieldLabel>
               <FieldContent>
-                <Input type="email" {...form.register('email')} />
+                <Input
+                  type="email"
+                  {...form.register('email')}
+                  readOnly
+                  disabled
+                />
                 <FieldError
                   errors={
                     form.formState.errors.email

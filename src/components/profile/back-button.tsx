@@ -12,7 +12,7 @@ export default function BackButton() {
       size="icon"
       variant="secondary"
       title="Go back"
-      className="rounded-full mb-4 p-5 hover:ring hover:ring-primary/80 focus-visible:ring-secondary/40 focus-visible:ring-offset-secondary/20"
+      className="absolute top-4 left-4 lg:-left-6 rounded-full p-5 hover:ring hover:ring-primary/80 focus-visible:ring-secondary/40 focus-visible:ring-offset-secondary/20"
       onClick={() => router.back()}
     >
       <ArrowLeft />

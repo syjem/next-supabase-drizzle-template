@@ -1,8 +1,8 @@
+import { ERRORS } from '#/constant/errors';
 import { createClient } from '#/lib/supabase/server';
-import { redirect } from 'next/navigation';
 
-// Use this to a route where user is optional, for example a home page
-export async function getUser() {
+// Use this for routes where user is optional (e.g. home page).
+export async function getClaims() {
   const supabase = await createClient();
   const { data, error } = await supabase.auth.getClaims();
 
@@ -13,13 +13,14 @@ export async function getUser() {
   return data.claims;
 }
 
-// Use this to a route where user is required, for example a dashboard page
-export async function getUserForProtectedRoutes() {
-  const user = await getUser();
+// Verifies if the session is still active server-side and returns the user data if valid.
+// Use this for sensitive operations
+export async function getUser() {
+  const supabase = await createClient();
 
-  if (!user) {
-    redirect('/auth/sign-in');
-  }
+  const { data } = await supabase.auth.getUser();
 
-  return user;
+  if (!data.user) throw new Error(ERRORS.UNAUTHORIZED);
+
+  return data.user;
 }

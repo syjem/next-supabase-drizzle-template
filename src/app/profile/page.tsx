@@ -1,4 +1,4 @@
-import { getUserForProtectedRoutes } from '#/app/auth';
+import { getUser } from '#/app/auth';
 import { AccountTab } from '#/components/profile/account-tab';
 import BackButton from '#/components/profile/back-button';
 import { PersonalInfoTab } from '#/components/profile/personal-info-tab';
@@ -12,21 +12,21 @@ export const metadata: Metadata = {
 };
 
 export default async function ProfilePage() {
-  const user = await getUserForProtectedRoutes();
+  const user = await getUser();
 
   const userData = {
-    name: user.user_metadata?.full_name ?? 'Jemuel Repoylo',
+    name: user.user_metadata?.full_name ?? '',
     email: user.email as string,
     avatarUrl: user.user_metadata?.avatar_url as string,
-    phone: user.phone as string,
-    location: 'San Francisco, CA',
-    website: 'https://example.com',
-    bio: 'Next.js enjoyer, Supabase fanboy.',
+    phone: user.user_metadata?.phone,
+    location: user.user_metadata?.location,
+    website: user.user_metadata?.website,
+    bio: user.user_metadata?.bio,
   };
 
   return (
     <main className="min-h-screen bg-background">
-      <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
         <BackButton />
 
         {/* Header */}
