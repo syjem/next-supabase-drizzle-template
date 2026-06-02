@@ -3,7 +3,7 @@ import { z } from 'zod';
 // Personal Information Schema
 export const personalInfoSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters').max(100),
-  email: z.email('Invalid email address'),
+  occupation: z.string().max(100).optional(),
   phone: z
     .string()
     .optional()

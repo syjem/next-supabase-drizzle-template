@@ -86,18 +86,13 @@ export function PersonalInfoTab({ initialData }: PersonalInfoTabProps) {
             </Field>
 
             <Field>
-              <FieldLabel>Email</FieldLabel>
+              <FieldLabel>Job Title</FieldLabel>
               <FieldContent>
-                <Input
-                  type="email"
-                  {...form.register('email')}
-                  readOnly
-                  disabled
-                />
+                <Input {...form.register('occupation')} />
                 <FieldError
                   errors={
-                    form.formState.errors.email
-                      ? [form.formState.errors.email]
+                    form.formState.errors.occupation
+                      ? [form.formState.errors.occupation]
                       : undefined
                   }
                 />

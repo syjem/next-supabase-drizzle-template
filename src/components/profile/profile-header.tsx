@@ -3,21 +3,23 @@
 import { uploadAvatar } from '#/actions/upload-avatar';
 import { Avatar, AvatarFallback, AvatarImage } from '#/components/ui/avatar';
 import { avatarUploadSchema } from '#/lib/zod/schema';
-import { Loader2, Upload, User } from 'lucide-react';
+import { BadgeCheck, Loader2, Upload, User } from 'lucide-react';
 import { useRef, useState } from 'react';
 import { toast } from 'sonner';
 import z from 'zod';
 
 interface ProfileHeaderProps {
   name: string;
-  email: string;
+  occupation: string;
+  emailVerified: boolean;
   avatarUrl?: string;
   bio?: string;
 }
 
 export function ProfileHeader({
   name,
-  email,
+  occupation,
+  emailVerified,
   avatarUrl,
   bio,
 }: ProfileHeaderProps) {
@@ -78,6 +80,7 @@ export function ProfileHeader({
           disabled={isUploading}
           className="absolute bottom-0 right-0 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-opacity hover:opacity-90 disabled:opacity-50"
           aria-label="Upload avatar"
+          title="Upload avatar"
         >
           {isUploading ? (
             <Loader2 className="h-4 w-4 animate-spin" />
@@ -97,8 +100,16 @@ export function ProfileHeader({
       </div>
 
       <div className="flex-1 text-center sm:text-left">
-        <h1 className="text-2xl font-bold">{name}</h1>
-        <address className="text-muted-foreground not-italic">{email}</address>
+        <div
+          className="flex items-center gap-2 cursor-default"
+          title={emailVerified ? 'Email verified' : 'Email not verified'}
+        >
+          <h1 className="text-xl font-bold">{name}</h1>
+          {emailVerified && <BadgeCheck className="h-5 w-5 text-green-500" />}
+        </div>
+        <span className="text-muted-foreground text-base font-semibold">
+          {occupation}
+        </span>
         <p className="mt-4 text-sm text-muted-foreground">{bio}</p>
       </div>
     </div>

@@ -51,7 +51,9 @@ export function UserAvatar({ user }: { user: JwtPayload | null }) {
         <DropdownMenuLabel>
           <div className="flex flex-col space-y-1">
             <span className="doc-subtitle text-sm">{userName}</span>
-            <address className="doc-caption truncate italic">{email}</address>
+            <address className="doc-caption truncate italic" title={email}>
+              {email}
+            </address>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />

@@ -17,6 +17,8 @@ export default async function ProfilePage() {
   const userData = {
     name: user.user_metadata?.full_name ?? '',
     email: user.email as string,
+    emailVerified: user.user_metadata?.email_verified ?? false,
+    occupation: user.user_metadata?.occupation,
     avatarUrl: user.user_metadata?.avatar_url as string,
     phone: user.user_metadata?.phone,
     location: user.user_metadata?.location,
@@ -41,7 +43,8 @@ export default async function ProfilePage() {
         <div className="mb-8">
           <ProfileHeader
             name={userData.name}
-            email={userData.email}
+            emailVerified={userData.emailVerified}
+            occupation={userData.occupation}
             avatarUrl={userData.avatarUrl}
             bio={userData.bio}
           />
@@ -59,7 +62,7 @@ export default async function ProfilePage() {
               <PersonalInfoTab
                 initialData={{
                   name: userData.name,
-                  email: userData.email,
+                  occupation: userData.occupation,
                   phone: userData.phone,
                   location: userData.location,
                   website: userData.website,

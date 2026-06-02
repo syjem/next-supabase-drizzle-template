@@ -10,6 +10,9 @@ export async function updateProfileInfo(
 
   const patch = {
     ...(userInfo.name !== undefined && { full_name: userInfo.name }),
+    ...(userInfo.occupation !== undefined && {
+      occupation: userInfo.occupation,
+    }),
     ...(userInfo.phone !== undefined && { phone: userInfo.phone }),
     ...(userInfo.location !== undefined && {
       location: userInfo.location,
