@@ -2,8 +2,15 @@
 
 import { uploadAvatar } from '#/actions/upload-avatar';
 import { Avatar, AvatarFallback, AvatarImage } from '#/components/ui/avatar';
+import { Badge } from '#/components/ui/badge';
 import { avatarUploadSchema } from '#/lib/zod/schema';
-import { BadgeCheck, Loader2, Upload, User } from 'lucide-react';
+import {
+  BadgeCheck,
+  BriefcaseBusiness,
+  Loader2,
+  Upload,
+  User,
+} from 'lucide-react';
 import { useRef, useState } from 'react';
 import { toast } from 'sonner';
 import z from 'zod';
@@ -25,6 +32,15 @@ export function ProfileHeader({
 }: ProfileHeaderProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isUploading, setIsUploading] = useState(false);
+
+  const initials = name
+    .split(' ')
+    .map((part) => part[0])
+    .join('')
+    .toUpperCase()
+    .slice(0, 2);
+
+  const showBadge = name !== 'Your name' && emailVerified;
 
   const handleFileSelect = async (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -56,13 +72,6 @@ export function ProfileHeader({
       fileInputRef.current.value = '';
     }
   };
-
-  const initials = name
-    .split(' ')
-    .map((part) => part[0])
-    .join('')
-    .toUpperCase()
-    .slice(0, 2);
 
   return (
     <div className="flex flex-col items-center gap-6 rounded-lg border border-border bg-card p-8 sm:flex-row sm:items-start">
@@ -100,17 +109,22 @@ export function ProfileHeader({
       </div>
 
       <div className="flex-1 text-center sm:text-left">
-        <div
-          className="flex items-center gap-2 cursor-default"
-          title={emailVerified ? 'Email verified' : 'Email not verified'}
-        >
-          <h1 className="text-xl font-bold">{name}</h1>
-          {emailVerified && <BadgeCheck className="h-5 w-5 text-green-500" />}
+        <div className="flex items-center gap-2 cursor-default w-fit">
+          <h2 className="text-2xl font-bold">{name}</h2>
+          {showBadge && (
+            <Badge variant="secondary" className="bg-green-50 text-green-800">
+              <BadgeCheck data-icon="inline-start" />
+              Verified
+            </Badge>
+          )}
         </div>
-        <span className="text-muted-foreground text-base font-semibold">
+        <span className="mt-1.5 flex items-center gap-2 text-muted-foreground text-sm font-semibold">
+          <BriefcaseBusiness className="h-4 w-4 font-bold text-sky-500" />
           {occupation}
         </span>
-        <p className="mt-4 text-sm text-muted-foreground">{bio}</p>
+        <p className="mt-3 text-sm text-muted-foreground whitespace-pre-wrap">
+          {bio}
+        </p>
       </div>
     </div>
   );

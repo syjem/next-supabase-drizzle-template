@@ -15,15 +15,14 @@ export default async function ProfilePage() {
   const user = await getUser();
 
   const userData = {
-    name: user.user_metadata?.full_name ?? '',
-    email: user.email as string,
+    name: user.user_metadata?.full_name ?? 'Your name',
     emailVerified: user.user_metadata?.email_verified ?? false,
-    occupation: user.user_metadata?.occupation,
+    occupation: user.user_metadata?.occupation ?? 'Your job title',
     avatarUrl: user.user_metadata?.avatar_url as string,
     phone: user.user_metadata?.phone,
     location: user.user_metadata?.location,
     website: user.user_metadata?.website,
-    bio: user.user_metadata?.bio,
+    bio: user.user_metadata?.bio ?? 'Tell us a bit about yourself',
   };
 
   return (

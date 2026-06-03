@@ -132,12 +132,15 @@ export function AccountTab() {
         >
           <div className="flex items-center justify-between rounded-lg border border-border p-4">
             <div className="space-y-0.5">
-              <FieldLabel className="text-base">Email Notifications</FieldLabel>
+              <FieldLabel htmlFor="notificationsEmail" className="text-base">
+                Email Notifications
+              </FieldLabel>
               <FieldDescription>
                 Receive email notifications about account activity
               </FieldDescription>
             </div>
             <Switch
+              id="notificationsEmail"
               checked={settingsForm.watch('notificationsEmail')}
               onCheckedChange={(value) =>
                 settingsForm.setValue('notificationsEmail', value)
@@ -147,12 +150,15 @@ export function AccountTab() {
 
           <div className="flex items-center justify-between rounded-lg border border-border p-4">
             <div className="space-y-0.5">
-              <FieldLabel className="text-base">Push Notifications</FieldLabel>
+              <FieldLabel htmlFor="notificationsPush" className="text-base">
+                Push Notifications
+              </FieldLabel>
               <FieldDescription>
                 Receive push notifications on your device
               </FieldDescription>
             </div>
             <Switch
+              id="notificationsPush"
               checked={settingsForm.watch('notificationsPush')}
               onCheckedChange={(value) =>
                 settingsForm.setValue('notificationsPush', value)
@@ -162,12 +168,15 @@ export function AccountTab() {
 
           <div className="flex items-center justify-between rounded-lg border border-border p-4">
             <div className="space-y-0.5">
-              <FieldLabel className="text-base">Newsletter</FieldLabel>
+              <FieldLabel htmlFor="emailNewsletter" className="text-base">
+                Newsletter
+              </FieldLabel>
               <FieldDescription>
                 Receive our weekly newsletter with updates and tips
               </FieldDescription>
             </div>
             <Switch
+              id="emailNewsletter"
               checked={settingsForm.watch('emailNewsletter')}
               onCheckedChange={(value) =>
                 settingsForm.setValue('emailNewsletter', value)
@@ -212,10 +221,13 @@ export function AccountTab() {
             >
               <FieldGroup>
                 <Field>
-                  <FieldLabel>Current Password</FieldLabel>
+                  <FieldLabel htmlFor="currentPassword">
+                    Current Password
+                  </FieldLabel>
                   <FieldContent>
                     <Input
                       type="password"
+                      id="currentPassword"
                       {...passwordForm.register('currentPassword')}
                     />
                     <FieldError
@@ -229,10 +241,11 @@ export function AccountTab() {
                 </Field>
 
                 <Field>
-                  <FieldLabel>New Password</FieldLabel>
+                  <FieldLabel htmlFor="newPassword">New Password</FieldLabel>
                   <FieldContent>
                     <Input
                       type="password"
+                      id="newPassword"
                       {...passwordForm.register('newPassword')}
                     />
                     <FieldDescription>
@@ -249,10 +262,13 @@ export function AccountTab() {
                 </Field>
 
                 <Field>
-                  <FieldLabel>Confirm Password</FieldLabel>
+                  <FieldLabel htmlFor="confirmPassword">
+                    Confirm Password
+                  </FieldLabel>
                   <FieldContent>
                     <Input
                       type="password"
+                      id="confirmPassword"
                       {...passwordForm.register('confirmPassword')}
                     />
                     <FieldError

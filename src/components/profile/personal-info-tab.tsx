@@ -72,9 +72,9 @@ export function PersonalInfoTab({ initialData }: PersonalInfoTabProps) {
         <FieldGroup>
           <div className="grid gap-6 sm:grid-cols-2">
             <Field>
-              <FieldLabel>Full Name</FieldLabel>
+              <FieldLabel htmlFor="name">Full Name</FieldLabel>
               <FieldContent>
-                <Input {...form.register('name')} />
+                <Input id="name" {...form.register('name')} />
                 <FieldError
                   errors={
                     form.formState.errors.name
@@ -86,9 +86,9 @@ export function PersonalInfoTab({ initialData }: PersonalInfoTabProps) {
             </Field>
 
             <Field>
-              <FieldLabel>Job Title</FieldLabel>
+              <FieldLabel htmlFor="occupation">Job Title</FieldLabel>
               <FieldContent>
-                <Input {...form.register('occupation')} />
+                <Input id="occupation" {...form.register('occupation')} />
                 <FieldError
                   errors={
                     form.formState.errors.occupation
@@ -102,9 +102,9 @@ export function PersonalInfoTab({ initialData }: PersonalInfoTabProps) {
 
           <div className="grid gap-6 sm:grid-cols-2">
             <Field>
-              <FieldLabel>Phone (Optional)</FieldLabel>
+              <FieldLabel htmlFor="phone">Phone (Optional)</FieldLabel>
               <FieldContent>
-                <Input {...form.register('phone')} />
+                <Input id="phone" {...form.register('phone')} />
                 <FieldDescription>
                   Include country code for international numbers
                 </FieldDescription>
@@ -119,9 +119,9 @@ export function PersonalInfoTab({ initialData }: PersonalInfoTabProps) {
             </Field>
 
             <Field>
-              <FieldLabel>Location (Optional)</FieldLabel>
+              <FieldLabel htmlFor="location">Location (Optional)</FieldLabel>
               <FieldContent>
-                <Input {...form.register('location')} />
+                <Input id="location" {...form.register('location')} />
                 <FieldError
                   errors={
                     form.formState.errors.location
@@ -134,9 +134,10 @@ export function PersonalInfoTab({ initialData }: PersonalInfoTabProps) {
           </div>
 
           <Field>
-            <FieldLabel>Website (Optional)</FieldLabel>
+            <FieldLabel htmlFor="website">Website (Optional)</FieldLabel>
             <FieldContent>
               <Input
+                id="website"
                 placeholder="https://example.com"
                 type="url"
                 {...form.register('website')}
@@ -153,9 +154,10 @@ export function PersonalInfoTab({ initialData }: PersonalInfoTabProps) {
           </Field>
 
           <Field>
-            <FieldLabel>Bio (Optional)</FieldLabel>
+            <FieldLabel htmlFor="bio">Bio (Optional)</FieldLabel>
             <FieldContent>
               <Textarea
+                id="bio"
                 placeholder="Tell us about yourself..."
                 className="resize-none"
                 rows={4}
