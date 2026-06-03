@@ -34,5 +34,7 @@ export async function uploadAvatar(file: File): Promise<string> {
     throw new Error(updateError.message || 'Failed to update avatar URL');
   }
 
+  await supabase.auth.refreshSession();
+
   return publicUrl;
 }
