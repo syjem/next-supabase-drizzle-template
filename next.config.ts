@@ -1,11 +1,11 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
   experimental: {
-    turbopackFileSystemCacheForDev: true
-  }
+    turbopackFileSystemCacheForDev: true,
+  },
 };
 
 export default nextConfig;

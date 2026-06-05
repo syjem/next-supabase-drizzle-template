@@ -31,11 +31,12 @@ export function PersonalInfoTab({ initialData }: PersonalInfoTabProps) {
     defaultValues: initialData,
   });
 
+  const { dirtyFields } = form.formState;
+
   async function onSubmit(data: PersonalInfoFormData) {
     try {
       setIsLoading(true);
 
-      const dirtyFields = form.formState.dirtyFields;
       const changedData = Object.fromEntries(
         Object.entries(data).filter(
           ([key]) => dirtyFields[key as keyof PersonalInfoFormData],
